@@ -1,0 +1,46 @@
+{
+  "products": [
+    {
+      "id": "p001",
+      "name": "Diyas & Candle Set",
+      "tagline": "Perfect Return Gift for Diwali! 🪔",
+      "contact": "Call: +91-XXXXXXXXXX",
+      "photo": "diya_set.jpg"
+    },
+    {
+      "id": "p002",
+      "name": "Miniature Pooja Thali",
+      "tagline": "Elegant & Traditional Gift 🙏",
+      "contact": "WhatsApp: +91-XXXXXXXXXX",
+      "photo": "pooja_thali.jpg"
+    },
+    {
+      "id": "p003",
+      "name": "Personalised Keychain",
+      "tagline": "Customised with Love ❤️",
+      "contact": "DM us to order!",
+      "photo": "keychain.jpg"
+    },
+    {
+      "id": "p004",
+      "name": "Handmade Chocolate Box",
+      "tagline": "Sweet Memories, Sweet Gifts 🍫",
+      "contact": "Call: +91-XXXXXXXXXX",
+      "photo": "chocolate_box.jpg"
+    },
+    {
+      "id": "p005",
+      "name": "Dry Fruit Gift Pack",
+      "tagline": "Healthy & Premium Return Gifts 🎁",
+      "contact": "WhatsApp: +91-XXXXXXXXXX",
+      "photo": "dry_fruits.jpg"
+    },
+    {
+      "id": "p006",
+      "name": "Brass Elephant Showpiece",
+      "tagline": "Bring Good Luck Home 🐘",
+      "contact": "Call: +91-XXXXXXXXXX",
+      "photo": "brass_elephant.jpg"
+    }
+  ]
+}
