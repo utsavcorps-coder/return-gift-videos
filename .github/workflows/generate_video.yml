@@ -1,0 +1,47 @@
+name: Generate Product Promo Video
+
+on:
+  schedule:
+    - cron: "30 3 * * *"    # Morning — 9:00 AM IST
+    - cron: "30 12 * * *"   # Evening — 6:00 PM IST
+
+  workflow_dispatch:
+    inputs:
+      product_id:
+        description: "Optional: specific product ID to use (e.g. p001)"
+        required: false
+        default: ""
+
+jobs:
+  generate-video:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: ⬇️ Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🐍 Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: 📦 Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: 🎬 Generate promo video
+        env:
+          SHOTSTACK_API_KEY: ${{ secrets.SHOTSTACK_API_KEY }}
+          GITHUB_REPO_RAW: ${{ secrets.GITHUB_REPO_RAW }}
+          PRODUCT_ID_OVERRIDE: ${{ github.event.inputs.product_id }}
+        run: python generate_video.py
+
+      - name: 💾 Save video log to repo
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add video_log.json used_products.json || true
+          git diff --staged --quiet || git commit -m "🎬 Auto: video log updated [$(date '+%Y-%m-%d %H:%M IST')]"
+          git push
