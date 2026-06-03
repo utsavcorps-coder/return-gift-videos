@@ -14,7 +14,7 @@ from datetime import datetime
 # ── Config ────────────────────────────────────────────────────────────────────
 SHOTSTACK_API_KEY = os.environ.get("SHOTSTACK_API_KEY")
 SHOTSTACK_BASE    = "https://api.shotstack.io/edit/stage/render"   # sandbox (free)
-GITHUB_REPO_RAW   = os.environ.get("SGITHUB_REPO_RAW")        # base URL for raw photos
+GITHUB_REPO_RAW   = os.environ.get("REPO_RAW_URL")           # base URL for raw photos
 
 HEADERS = {
     "x-api-key": SHOTSTACK_API_KEY,
@@ -199,6 +199,16 @@ def save_result(product, video_url, run_number):
 def main():
     if not SHOTSTACK_API_KEY:
         raise EnvironmentError("SHOTSTACK_API_KEY secret is not set!")
+    if not GITHUB_REPO_RAW:
+        raise EnvironmentError("REPO_RAW_URL secret is not set!")
+
+    # Validate that REPO_RAW_URL looks like a proper URL
+    if not GITHUB_REPO_RAW.startswith("https://"):
+        raise ValueError(
+            f"REPO_RAW_URL must start with https://\n"
+            f"  Current value: '{GITHUB_REPO_RAW}'\n"
+            f"  Expected:       'https://raw.githubusercontent.com/YOUR_USERNAME/return-gift-videos/main'"
+        )
 
     # Determine which run this is (1 = morning, 2 = evening)
     hour = datetime.utcnow().hour
@@ -207,6 +217,20 @@ def main():
 
     product = load_products()
     print(f"📦 Selected product: {product['name']}")
+
+    # Build payload and print the photo URL so it's easy to verify
+    photo_url = f"{GITHUB_REPO_RAW}/photos/{product['photo']}"
+    print(f"🖼️  Photo URL: {photo_url}")
+
+    # Quick check: verify the photo URL is actually reachable before sending to API
+    check = requests.head(photo_url, timeout=10)
+    if check.status_code != 200:
+        raise FileNotFoundError(
+            f"Photo not accessible (HTTP {check.status_code}): {photo_url}\n"
+            f"  → Make sure the file exists in your repo's photos/ folder\n"
+            f"  → Make sure the repo is set to Public"
+        )
+    print(f"✅ Photo URL verified (HTTP 200)")
 
     payload  = build_video_payload(product)
     render_id = submit_render(payload)
