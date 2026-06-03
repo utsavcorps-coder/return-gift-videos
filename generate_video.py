@@ -239,8 +239,6 @@ def save_result(product, video_url, run_number):
 def main():
     if not SHOTSTACK_API_KEY:
         raise EnvironmentError("SHOTSTACK_API_KEY secret is not set!")
-    if not GITHUB_REPO_RAW:
-        raise EnvironmentError("GITHUB_REPO_RAW secret is not set!")
 
     # Determine which run this is (1 = morning, 2 = evening)
     hour = datetime.utcnow().hour
