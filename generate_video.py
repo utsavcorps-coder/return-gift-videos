@@ -13,8 +13,8 @@ from datetime import datetime
 
 # ── Config ────────────────────────────────────────────────────────────────────
 SHOTSTACK_API_KEY = os.environ.get("SHOTSTACK_API_KEY")
-SHOTSTACK_BASE    = "https://api.shotstack.io/stage/render"   # sandbox (free)
-GITHUB_REPO_RAW   = os.environ.get("GITHUB_REPO_RAW")        # base URL for raw photos
+SHOTSTACK_BASE    = "https://api.shotstack.io/edit/stage/render"   # sandbox (free)
+GITHUB_REPO_RAW   = os.environ.get("SGITHUB_REPO_RAW")        # base URL for raw photos
 
 HEADERS = {
     "x-api-key": SHOTSTACK_API_KEY,
@@ -55,18 +55,19 @@ def build_video_payload(product):
     """
     Build Shotstack JSON payload for a ~20-second product promo video.
     Layout:
-      0–3s   : Product photo fades in (zoom effect)
-      3–10s  : Product name text overlay
-      10–17s : Tagline + CTA text
-      17–20s : Logo / brand name outro
+      0–5s   : Product photo with zoomIn effect
+      5–12s  : Product photo continues + product name title overlay
+      12–19s : Product photo continues + tagline title overlay
+      19–20s : Fade out
+    Uses only 'image' and 'title' asset types — both fully supported on free tier.
     """
     photo_url = f"{GITHUB_REPO_RAW}/photos/{product['photo']}"
 
     payload = {
         "timeline": {
-            "background": "#1a1a2e",
+            "background": "#000000",
             "tracks": [
-                # ── Track 1: Product photo (full duration) ──────────────────
+                # ── Track 1: Product photo (full 20s, stays behind text) ─────
                 {
                     "clips": [
                         {
@@ -76,16 +77,15 @@ def build_video_payload(product):
                             },
                             "start": 0,
                             "length": 20,
-                            "effect": "zoomIn",        # gentle zoom for energy
+                            "effect": "zoomIn",
                             "transition": {
                                 "in": "fade",
                                 "out": "fade",
                             },
-                            "fit": "cover",
                         }
                     ]
                 },
-                # ── Track 2: Product name (3–10s) ───────────────────────────
+                # ── Track 2: Product name (5–12s) ────────────────────────────
                 {
                     "clips": [
                         {
@@ -95,86 +95,44 @@ def build_video_payload(product):
                                 "style": "future",
                                 "color": "#ffffff",
                                 "size": "large",
-                                "background": "transparent",
+                                "background": "#000000",
                                 "position": "center",
                             },
-                            "start": 3,
+                            "start": 5,
                             "length": 7,
                             "transition": {"in": "slideUp", "out": "fade"},
                         }
                     ]
                 },
-                # ── Track 3: Tagline (10–17s) ────────────────────────────────
+                # ── Track 3: Tagline (12–19s) ────────────────────────────────
                 {
                     "clips": [
                         {
                             "asset": {
-                                "type": "html",
-                                "html": f"""
-                                    <p style="
-                                        font-family: Arial, sans-serif;
-                                        font-size: 48px;
-                                        color: #FFD700;
-                                        text-align: center;
-                                        background: rgba(0,0,0,0.5);
-                                        padding: 20px 40px;
-                                        border-radius: 12px;
-                                    ">{product['tagline']}</p>
-                                """,
-                                "width": 900,
-                                "height": 200,
+                                "type": "title",
+                                "text": product["tagline"],
+                                "style": "subtitle",
+                                "color": "#FFD700",
+                                "size": "medium",
+                                "background": "#000000",
+                                "position": "bottom",
                             },
-                            "start": 10,
+                            "start": 12,
                             "length": 7,
-                            "position": "center",
                             "transition": {"in": "fade", "out": "fade"},
-                        }
-                    ]
-                },
-                # ── Track 4: CTA / contact (17–20s) ─────────────────────────
-                {
-                    "clips": [
-                        {
-                            "asset": {
-                                "type": "html",
-                                "html": f"""
-                                    <p style="
-                                        font-family: Arial, sans-serif;
-                                        font-size: 40px;
-                                        color: #ffffff;
-                                        text-align: center;
-                                        background: rgba(255,140,0,0.85);
-                                        padding: 16px 36px;
-                                        border-radius: 10px;
-                                    ">📞 {product.get('contact', 'Contact us to order!')}</p>
-                                """,
-                                "width": 900,
-                                "height": 150,
-                            },
-                            "start": 17,
-                            "length": 3,
-                            "position": "bottomCenter",
-                            "offset": {"y": -0.05},
-                            "transition": {"in": "slideUp", "out": "fade"},
                         }
                     ]
                 },
             ],
             # ── Background music ─────────────────────────────────────────────
             "soundtrack": {
-                "src": "https://shotstack-assets.s3-ap-southeast-2.amazonaws.com/music/freepd/effects.mp3",
+                "src": "https://shotstack-assets.s3-ap-southeast-2.amazonaws.com/music/freepd/advertising.mp3",
                 "effect": "fadeInFadeOut",
-                "volume": 0.4,
             },
         },
         "output": {
             "format": "mp4",
-            "resolution": "sd",       # 1024x576 — free tier friendly
-            "fps": 25,
-            "size": {
-                "width": 1080,
-                "height": 1080,       # square for social media
-            },
+            "resolution": "sd",    # 1024x576 — supported on free tier
         },
     }
     return payload
@@ -183,6 +141,8 @@ def build_video_payload(product):
 def submit_render(payload):
     """Submit video render job to Shotstack."""
     resp = requests.post(SHOTSTACK_BASE, headers=HEADERS, json=payload, timeout=30)
+    if not resp.ok:
+        print(f"❌ API error {resp.status_code}: {resp.text}")
     resp.raise_for_status()
     data = resp.json()
     render_id = data["response"]["id"]
@@ -192,7 +152,7 @@ def submit_render(payload):
 
 def poll_render(render_id, max_wait=300):
     """Poll until render is done or timeout."""
-    url = f"{SHOTSTACK_BASE}/{render_id}"
+    url = f"https://api.shotstack.io/edit/stage/render/{render_id}"
     elapsed = 0
     while elapsed < max_wait:
         time.sleep(15)
