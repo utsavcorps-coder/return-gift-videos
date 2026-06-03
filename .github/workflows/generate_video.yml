@@ -1,10 +1,14 @@
 name: Generate Product Promo Video
 
 on:
+  # ── Cron: runs twice a day (times in UTC) ──────────────────────────────────
+  # 3:30 AM UTC  = 9:00 AM IST  (morning post)
+  # 12:30 PM UTC = 6:00 PM IST  (evening post)
   schedule:
     - cron: "30 3 * * *"    # Morning — 9:00 AM IST
     - cron: "30 12 * * *"   # Evening — 6:00 PM IST
 
+  # ── Also allow manual trigger from GitHub UI ───────────────────────────────
   workflow_dispatch:
     inputs:
       product_id:
@@ -16,28 +20,34 @@ jobs:
   generate-video:
     runs-on: ubuntu-latest
 
+    # Allow the workflow to commit the video log back to the repo
     permissions:
       contents: write
 
     steps:
+      # 1. Check out your repository (includes photos/ folder)
       - name: ⬇️ Checkout repository
         uses: actions/checkout@v4
 
+      # 2. Set up Python
       - name: 🐍 Set up Python 3.11
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
+      # 3. Install dependencies
       - name: 📦 Install dependencies
         run: pip install -r requirements.txt
 
+      # 4. Run the video generation script
       - name: 🎬 Generate promo video
         env:
           SHOTSTACK_API_KEY: ${{ secrets.SHOTSTACK_API_KEY }}
-          GITHUB_REPO_RAW: ${{ secrets.GITHUB_REPO_RAW }}
+          REPO_RAW_URL: ${{ secrets.REPO_RAW_URL }}
           PRODUCT_ID_OVERRIDE: ${{ github.event.inputs.product_id }}
         run: python generate_video.py
 
+      # 5. Commit updated logs back to repo (video URLs + usage tracking)
       - name: 💾 Save video log to repo
         run: |
           git config user.name  "github-actions[bot]"
