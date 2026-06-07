@@ -64,5 +64,11 @@
     "run": 1,
     "product": "Diyas & Candle Set",
     "video_url": "https://shotstack-api-stage-output.s3-ap-southeast-2.amazonaws.com/k1olysmqta/a60fe6e9-fd85-4a5f-80b4-011ffe0c9c11.mp4"
+  },
+  {
+    "timestamp": "2026-06-07T14:31:02.546509",
+    "run": 2,
+    "product": "Miniature Pooja Thali",
+    "video_url": "https://shotstack-api-stage-output.s3-ap-southeast-2.amazonaws.com/k1olysmqta/0eb99ba3-8a54-4e8c-b26d-13883f80b1ff.mp4"
   }
 ]
