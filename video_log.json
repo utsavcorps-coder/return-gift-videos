@@ -130,5 +130,11 @@
     "run": 1,
     "product": "Diyas & Candle Set",
     "video_url": "https://shotstack-api-stage-output.s3-ap-southeast-2.amazonaws.com/k1olysmqta/9f7d0844-7cce-4f86-a9f1-746882a874cb.mp4"
+  },
+  {
+    "timestamp": "2026-06-13T14:40:02.952796",
+    "run": 2,
+    "product": "Handmade Chocolate Box",
+    "video_url": "https://shotstack-api-stage-output.s3-ap-southeast-2.amazonaws.com/k1olysmqta/525e2a19-08dc-4e5b-8093-2ff5c6639452.mp4"
   }
 ]
