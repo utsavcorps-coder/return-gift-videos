@@ -172,5 +172,11 @@
     "run": 2,
     "product": "Personalised Keychain",
     "video_url": "https://shotstack-api-stage-output.s3-ap-southeast-2.amazonaws.com/k1olysmqta/90aa404c-d22e-4605-ab57-fd437c0f8c9d.mp4"
+  },
+  {
+    "timestamp": "2026-06-17T08:42:59.267742",
+    "run": 1,
+    "product": "Miniature Pooja Thali",
+    "video_url": "https://shotstack-api-stage-output.s3-ap-southeast-2.amazonaws.com/k1olysmqta/5d2e78b3-0198-4614-9c54-6c638c12a38e.mp4"
   }
 ]
