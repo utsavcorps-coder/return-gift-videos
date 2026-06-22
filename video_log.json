@@ -238,5 +238,11 @@
     "run": 1,
     "product": "Personalised Keychain",
     "video_url": "https://shotstack-api-stage-output.s3-ap-southeast-2.amazonaws.com/k1olysmqta/3cfbe411-233f-4cf1-bcef-acb62729aa08.mp4"
+  },
+  {
+    "timestamp": "2026-06-22T17:16:41.384093",
+    "run": 2,
+    "product": "Handmade Chocolate Box",
+    "video_url": "https://shotstack-api-stage-output.s3-ap-southeast-2.amazonaws.com/k1olysmqta/717772d9-14bb-401b-9a58-75b0bd61a3ea.mp4"
   }
 ]
