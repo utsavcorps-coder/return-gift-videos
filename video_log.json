@@ -250,5 +250,11 @@
     "run": 1,
     "product": "Brass Elephant Showpiece",
     "video_url": "https://shotstack-api-stage-output.s3-ap-southeast-2.amazonaws.com/k1olysmqta/1c812524-2dce-460c-8cf9-3e32b155b2bd.mp4"
+  },
+  {
+    "timestamp": "2026-06-23T15:42:37.625703",
+    "run": 2,
+    "product": "Dry Fruit Gift Pack",
+    "video_url": "https://shotstack-api-stage-output.s3-ap-southeast-2.amazonaws.com/k1olysmqta/b6e718e7-8cdf-43ee-983f-cebe5ffb1b73.mp4"
   }
 ]
