@@ -262,5 +262,11 @@
     "run": 1,
     "product": "Handmade Chocolate Box",
     "video_url": "https://shotstack-api-stage-output.s3-ap-southeast-2.amazonaws.com/k1olysmqta/2c510bbe-f057-4c7a-b61c-4c054e6ff1cf.mp4"
+  },
+  {
+    "timestamp": "2026-06-24T15:20:17.696764",
+    "run": 2,
+    "product": "Miniature Pooja Thali",
+    "video_url": "https://shotstack-api-stage-output.s3-ap-southeast-2.amazonaws.com/k1olysmqta/4594f719-3f0c-4feb-b19f-586343cc1c5a.mp4"
   }
 ]
