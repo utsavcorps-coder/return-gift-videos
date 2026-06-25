@@ -268,5 +268,11 @@
     "run": 2,
     "product": "Miniature Pooja Thali",
     "video_url": "https://shotstack-api-stage-output.s3-ap-southeast-2.amazonaws.com/k1olysmqta/4594f719-3f0c-4feb-b19f-586343cc1c5a.mp4"
+  },
+  {
+    "timestamp": "2026-06-25T07:00:39.357777",
+    "run": 1,
+    "product": "Dry Fruit Gift Pack",
+    "video_url": "https://shotstack-api-stage-output.s3-ap-southeast-2.amazonaws.com/k1olysmqta/7593fb37-87a8-4f34-b5b0-747fb71bfcc5.mp4"
   }
 ]
