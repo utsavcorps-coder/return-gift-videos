@@ -292,5 +292,11 @@
     "run": 2,
     "product": "Diyas & Candle Set",
     "video_url": "https://shotstack-api-stage-output.s3-ap-southeast-2.amazonaws.com/k1olysmqta/276d28fe-26ed-4b31-918d-fa4cf84cd3a6.mp4"
+  },
+  {
+    "timestamp": "2026-06-27T06:42:01.547850",
+    "run": 1,
+    "product": "Brass Elephant Showpiece",
+    "video_url": "https://shotstack-api-stage-output.s3-ap-southeast-2.amazonaws.com/k1olysmqta/19ec3db3-d9d1-4cd6-85c1-996585bc5f8b.mp4"
   }
 ]
