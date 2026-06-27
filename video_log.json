@@ -298,5 +298,11 @@
     "run": 1,
     "product": "Brass Elephant Showpiece",
     "video_url": "https://shotstack-api-stage-output.s3-ap-southeast-2.amazonaws.com/k1olysmqta/19ec3db3-d9d1-4cd6-85c1-996585bc5f8b.mp4"
+  },
+  {
+    "timestamp": "2026-06-27T14:15:25.498585",
+    "run": 2,
+    "product": "Handmade Chocolate Box",
+    "video_url": "https://shotstack-api-stage-output.s3-ap-southeast-2.amazonaws.com/k1olysmqta/2e1881b6-8f4e-447d-87a4-22317a46d286.mp4"
   }
 ]
