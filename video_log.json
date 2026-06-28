@@ -304,5 +304,11 @@
     "run": 2,
     "product": "Handmade Chocolate Box",
     "video_url": "https://shotstack-api-stage-output.s3-ap-southeast-2.amazonaws.com/k1olysmqta/2e1881b6-8f4e-447d-87a4-22317a46d286.mp4"
+  },
+  {
+    "timestamp": "2026-06-28T07:13:50.885449",
+    "run": 1,
+    "product": "Dry Fruit Gift Pack",
+    "video_url": "https://shotstack-api-stage-output.s3-ap-southeast-2.amazonaws.com/k1olysmqta/bee07166-b3b6-44c8-aa37-27d7ad28e73d.mp4"
   }
 ]
