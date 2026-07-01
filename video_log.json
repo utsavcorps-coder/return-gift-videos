@@ -346,5 +346,11 @@
     "run": 1,
     "product": "Personalised Keychain",
     "video_url": "https://shotstack-api-stage-output.s3-ap-southeast-2.amazonaws.com/k1olysmqta/a48de743-8e23-4e6c-bead-f948767417a1.mp4"
+  },
+  {
+    "timestamp": "2026-07-01T15:22:00.298158",
+    "run": 2,
+    "product": "Brass Elephant Showpiece",
+    "video_url": "https://shotstack-api-stage-output.s3-ap-southeast-2.amazonaws.com/k1olysmqta/db0c8edc-1098-4c7e-a697-0fa79582605e.mp4"
   }
 ]
