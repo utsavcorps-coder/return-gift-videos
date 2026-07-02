@@ -352,5 +352,11 @@
     "run": 2,
     "product": "Brass Elephant Showpiece",
     "video_url": "https://shotstack-api-stage-output.s3-ap-southeast-2.amazonaws.com/k1olysmqta/db0c8edc-1098-4c7e-a697-0fa79582605e.mp4"
+  },
+  {
+    "timestamp": "2026-07-02T06:54:52.973145",
+    "run": 1,
+    "product": "Miniature Pooja Thali",
+    "video_url": "https://shotstack-api-stage-output.s3-ap-southeast-2.amazonaws.com/k1olysmqta/a3644a41-cf89-47c6-b2b7-3c1345c78796.mp4"
   }
 ]
